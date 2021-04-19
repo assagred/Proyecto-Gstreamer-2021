@@ -27,6 +27,17 @@
    * -o fichero_ogg: nombre del fichero del audio que se va a generar en formato OGG.
    * -t: responde al evento de teclado para poner el instante de tiempo enla imagen visualizada.
    */
+#include <gst/gst.h>
+#include <glib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <ctype.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main (int   argc, char *argv[])
+{
 
   int c;
   char *mp3_file;
