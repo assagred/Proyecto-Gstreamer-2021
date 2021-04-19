@@ -9,5 +9,5 @@ Equipo:
 Versión implementada (dejar sólo las líneas que procedan):
 - pipeline
 - reproducción mp3 visualmente (goom)
-- convertir mp3 a ogg
-- eventos de teclado
+- conversión mp3 a ogg
+- manejar eventos de teclado (mostrar tiempo)
