@@ -1,6 +1,6 @@
 /*
  * 
- * Proyecto GStreamer - Aplicaciones Multimedia (2019-2020)
+ * Proyecto GStreamer - Aplicaciones Multimedia (2020-2021)
  * Universidad Carlos III de Madrid
  *
  * Equipo (TO DO: rellenar con los datos adecuados):
@@ -8,14 +8,11 @@
  * - Alumno 2 (nombre, apellidos y NIA)
  *
  * Versión implementada (TO DO: eliminar las líneas que no procedan):
- * - versión básica
- * - intervalo 
- * - texto
- * - bordes
+ * - pipeline
+ * - reproducción mp3 visualmente (goom)
+ * - conversión mp3 a ogg
+ *  - manejar eventos de teclado (mostrar tiempo)
  */
-
-
-
 
   // ------------------------------------------------------------
   // Procesar argumentos
@@ -25,57 +22,52 @@
 
   /* 
    * Argumentos del programa:
-   * -h: presenta la ayuda y termina (con estado 0)
-   * -i inicio: instante inicial a partir del cual reproducir y realizar la detección (en nanosegundos)
-   * -f fin: instante final en el que detener la reproducción y detección (en nanosegundos)
-   * -t: superpone un texto con el número de código de barras y su símbolo en la imagen visualizada
-   * -b: aplica un borde de color rojo al vídeo para resaltar las imágenes en que aparece un código de barras
-   * fichero_entrada: fichero de vídeo a analizar
+   * -h: presenta la ayuda y termina (con estado 0).
+   * -f fichero_mp3: nombre del fichero del audio de entrada en formato MP3.   
+   * -o fichero_ogg: nombre del fichero del audio que se va a generar en formato OGG.
+   * -t: responde al evento de teclado para poner el instante de tiempo enla imagen visualizada.
    */
 
-
   int c;
-  char *filename;
+  char *mp3_file;
+  char *ogg_file = NULL;
     
   opterr = 0;  // no es necesario declararla, la exporta getopt
 
-  while ((c = getopt (argc, argv, "hi:f:tb")) != -1) {
+  while ((c = getopt (argc, argv, "hto:f:")) != -1) {
     switch (c)
       {
       case 'h':
 	// ayuda
 	g_print("Funcionalidad ayuda no implementada\n");
-        break;
-
-      case 'i':
-	// tiempo inicio intervalo de vídeo a procesar
-	g_print("Funcionalidad intervalo no implementada\n");
-        break;
+		
+        return 0;
 
       case 'f':
-	// tiempo inicio intervalo de vídeo a procesar
-	g_print("Funcionalidad intervalo no implementada\n");
+	// fichero_ogg: nombre del fichero del audio de entrada (MP3).
+		g_print("Funcionalidad leer fichero mp3 y mostrar goom no implementada\n");
+        break;
+		
+      case 'o':
+	// fichero_ogg: nombre del fichero del audio que se va a generar en formato OGG.
+	g_print("Funcionalidad convertir fichero mp3 a ogg\n");
+		    
         break;
 
       case 't':
-	// Texto sobrescrito
-	g_print("Funcionalidad efectos no implementada\n");
-        break;
-
-      case 'b':
-	// Borde en la pantalla
-	g_print("Funcionalidad efectos no implementada\n");
+	// superpone un texto con el instante en la imagen visualizada.
+	g_print("Funcionalidad un texto con el instante en la imagen no implementada\n");
         break;
 
       case '?':
 	// getopt devuelve '?' si encuentra una opción desconocida
 	// o si falta el argumento para una opción que lo requiere
 	// La opción conflictiva queda almacenada en optopt
-        if ((optopt == 'i') ||(optopt == 'f') || (optopt == 'l') ||(optopt == 'g')) {
+        if ((optopt == 'o') ) {
 	  // falta argumento para opción que lo requiere
           fprintf (stderr, "Error: la opción -%c requiere un argumento\n", optopt);
-	}
-	// error: opción desconocida
+		}
+		// error: opción desconocida
         else if (isprint (optopt))
           fprintf (stderr, "Error: argumento `-%c' no válido\n", optopt);
         else
@@ -89,10 +81,8 @@
         return 1;
       }
   }
-
-  filename = argv[optind];
   
-  // getopt recoloca los argumentos no procesados al final
+   // getopt recoloca los argumentos no procesados al final
   // el primero será el nombre del fichero de entrada (es correcto)
   // si hay algún otro: error argumento desconocido
   for (int index = optind+1; index < argc; index++) {
@@ -100,5 +90,6 @@
     return 1;
   }
 
+}
 
 
