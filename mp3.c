@@ -40,8 +40,6 @@ int main (int   argc, char *argv[])
 {
 
   int c;
-  char *mp3_file;
-  char *ogg_file = NULL;
     
   opterr = 0;  // no es necesario declararla, la exporta getopt
 
